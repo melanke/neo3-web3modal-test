@@ -23,31 +23,26 @@ const init = async () => {
     },
   });
 
-  await web3Modal.onSessionDelete(renderSession)
+  await web3Modal.onSessionDelete(render)
 
-  renderSession()
+  render()
 }
 
 const connect = async () => {
   await web3Modal.connect({
     requiredNamespaces: {
       neo3: {
-        chains: ["neo3:mainnet"],
+        chains: ["neo3:testnet"],
         methods: [
-          'invokeFunction',
           'testInvoke',
-          'signMessage',
-          'verifyMessage',
-          'traverseIterator',
-          'getWalletInfo',
-          'getNetworkVersion',
+          'invokeFunction',
         ],
         events: [],
       },
     },
   });
 
-  renderSession()
+  render()
 }
 
 const disconnect = async () => {
@@ -59,7 +54,7 @@ const disconnect = async () => {
     },
   })
 
-  renderSession()
+  render()
 }
 
 const getAccountInfo = async () => {
@@ -167,7 +162,7 @@ const registerInteraction = () => {
   document.getElementById('transferGas').addEventListener('click', transferGas)
 }
 
-const renderSession = async () => {
+const render = async () => {
   if (await web3Modal.getSession()) {
     document.getElementById('afterConnect').style.display = 'block'
     document.getElementById('connect').style.display = 'none'
